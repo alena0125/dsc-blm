@@ -55,7 +55,6 @@ gemma.bslmm.wrapper = function(input, args){
   y.test.predict = gemma.prdt[!is.na(gemma.prdt)]
 
   # rmv training set and output directory
-  return(list(predict=y.test.predict))   
+  return(list(predict=y.test.predict))
 }
 prediction = gemma.bslmm.wrapper(input, args)$predict
-

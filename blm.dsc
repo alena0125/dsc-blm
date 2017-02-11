@@ -43,9 +43,8 @@ score:
     prediction: $prediction
   return: mse = output$mse, pcor = output$pcor, slope = output$slope
 
-
 DSC:
-  run: scenarios * (bayeslasso, gemma_bslmm, rrblup, rrblup_gkernel)  
+  run: scenarios * (bayeslasso, gemma_bslmm, rrblup, rrblup_gkernel) * score 
   output: dsc_blm
   exec_path: datamakers, methods, .
   R_libs: BLR, rrBLUP

@@ -19,3 +19,4 @@ score = function(meta, prediction){
   
   return(list(mse=mse, rmse=rmse, pcor=pcor, slope=slope))
 }
+output = score(meta, prediction)

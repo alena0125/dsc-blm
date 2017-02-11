@@ -1,0 +1,3 @@
+bayeslasso:
+  bayeslasso:
+   exec: bayeslasso.wrapper.R
