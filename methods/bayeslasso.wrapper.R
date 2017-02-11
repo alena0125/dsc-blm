@@ -64,3 +64,6 @@ bayeslasso.wrapper = function(input, args){
   return(list(predict=y.test.predict)) 
 
 }
+
+prediction = bayeslasso.wrapper(input, args)
+  

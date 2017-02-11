@@ -16,7 +16,8 @@ gemma.bslmm.wrapper = function(input, args){
   y.test.true = y[whichNA]
   
   # write the training set for gemma
-  train.phenotype.path = paste0(data.path, 'gemma_train_phenotype_', input$phenotype.id, '.txt')
+  system('mkdir -p output')
+  train.phenotype.path = paste0('./output/', args$result, '_train_phenotype_', input$phenotype.id, '.txt')
   write(YNA, file=train.phenotype.path, ncolumns=1);
 
   # default setting for gemma-bslmm
@@ -33,7 +34,7 @@ gemma.bslmm.wrapper = function(input, args){
   
   # fit bslmm model using training set
   # turn off all the snp filters
-  model_fitting_command = "methods/gemma -o result -notsnp"
+  model_fitting_command = paste("methods/gemma -o", args$result,  "-notsnp")
   # specify the model type
   model_fitting_command = paste(model_fitting_command, "-bslmm", as.character(bslmm))
   # specify the training data
@@ -44,17 +45,17 @@ gemma.bslmm.wrapper = function(input, args){
   system(model_fitting_command)
   
   # predict traits for the test set  
-  train_predict_command = "methods/gemma -o result -notsnp -epm ./output/result.param.txt -emu ./output/result.log.txt -predict 1"
+  train_predict_command = paste0("methods/gemma -o ", args$result, " -notsnp -epm ./output/",
+                                 args$result, ".param.txt -emu ./output/", args$result, ".log.txt -predict 1")
   train_predict_command = paste(train_predict_command, "-g", genotype.path, "-p", train.phenotype.path)
   system(train_predict_command)
   
   # extract the useful info and delete the files/directories
-  gemma.prdt = read.table('output/result.prdt.txt')
+  gemma.prdt = read.table(paste0('output/', args$result, '.prdt.txt'))
   y.test.predict = gemma.prdt[!is.na(gemma.prdt)]
 
   # rmv training set and output directory
-  status = file.remove(train.phenotype.path)
-  system('rm -rf output')
-  
   return(list(predict=y.test.predict))   
 }
+prediction = gemma.bslmm.wrapper(input, args)$predict
+

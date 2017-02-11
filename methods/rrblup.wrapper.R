@@ -36,3 +36,4 @@ rrblup.wrapper = function(input, args){
   y.test.predict = results$g[test]
   return(list(predict=y.test.predict)) 
 }
+prediction = rrblup.wrapper(input, args)$predict

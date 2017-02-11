@@ -23,3 +23,4 @@ datamaker = function(args){
   return(data)
 
 }
+data = datamaker(args)

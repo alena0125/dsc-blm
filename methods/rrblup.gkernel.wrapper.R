@@ -36,3 +36,5 @@ rrblup.gkernel.wrapper = function(input, args){
   y.test.predict = results$g[test]
   return(list(predict=y.test.predict)) 
 }
+
+prediction = rrblup.gkernel.wrapper(input, args)$predict
