@@ -5,7 +5,7 @@ scenarios:
     data_set: "wheat"
     test_size: 100
     phenotype_id: 1
-    .alias: args = Pack(data.name = data_set, test.size = test_size, phenotype.id = phenotype_id)
+    .alias: args = List(data.name = data_set, test.size = test_size, phenotype.id = phenotype_id)
   return: input = data$input, meta = data$meta
 
 bayeslasso:
@@ -15,7 +15,7 @@ bayeslasso:
     input: $input
     nIter: 1.1E4
     burnin: 1E3
-    .alias: args = Pack()
+    .alias: args = List()
   return: prediction
 
 gemma_bslmm(bayeslasso):
@@ -23,7 +23,7 @@ gemma_bslmm(bayeslasso):
   .alias: gemma_bslmm
   params:
     result: File()
-    .alias: args = Pack(w = nIter, s = burnin, result = result)
+    .alias: args = List(w = nIter, s = burnin, result = result)
 
 rrblup:
   exec: rrblup.wrapper.R
