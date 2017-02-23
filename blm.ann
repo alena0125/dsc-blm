@@ -1,3 +1,18 @@
-bayeslasso:
-  bayeslasso:
-   exec: bayeslasso.wrapper.R
+bayeslasso: 
+    bayeslasso: 
+        exec: bayeslasso
+datamaker_R: 
+    scenarios: 
+        exec: datamaker.R
+gemma_bslmm: 
+    gemma_bslmm: 
+        exec: gemma_bslmm
+rrblup: 
+    rrblup: 
+        exec: rrblup
+rrblup_gkernel: 
+    rrblup_gkernel: 
+        exec: rrblup_gkernel
+score_R: 
+    score: 
+        exec: score.R
