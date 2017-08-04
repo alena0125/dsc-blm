@@ -10,5 +10,5 @@ If you run into issues with the installation please find more information on the
 
 ## Running the benchmark
 ```
-$ dsc -x blm.dsc -a blm.ann -j8
+$ dsc blm.dsc -c 8
 ```
