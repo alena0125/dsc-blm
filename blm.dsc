@@ -1,50 +1,38 @@
-scenarios:
-  exec: datamaker.R
+simulate: datamaker.R
   seed: R(1:50)
-  params:
-    data_set: "wheat"
-    test_size: 100
-    phenotype_id: 1
-    .alias: args = List(data.name = data_set, test.size = test_size, phenotype.id = phenotype_id)
-  return: input = data$input, meta = data$meta
+  data_set: "wheat"
+  test_size: 100
+  phenotype_id: 1
+  @ALIAS: args = List(data.name = data_set, test.size = test_size, phenotype.id = phenotype_id)
+  $input: data$input
+  $meta: data$meta
 
-bayeslasso:
-  exec: bayeslasso.wrapper.R
-  .alias: bayeslasso
-  params:
-    input: $input
-    nIter: 1.1E4
-    burnin: 1E3
-    .alias: args = List()
-  return: prediction
+rrblup: rrblup.wrapper.R
+  input: $input
+  $prediction: prediction
 
-gemma_bslmm(bayeslasso):
-  exec: gemma.bslmm.wrapper.R
-  .alias: gemma_bslmm
-  params:
-    result: File()
-    .alias: args = List(w = nIter, s = burnin, result = result)
+rrblup_gkernel(rrblup): rrblup.gkernel.wrapper.R
 
-rrblup:
-  exec: rrblup.wrapper.R
-  .alias: rrblup
-  params:
-    input: $input
-  return: prediction
+bayeslasso(rrblup): bayeslasso.wrapper.R
+  nIter: 1.1E4
+  burnin: 1E3
+  @ALIAS: args = List()
 
-rrblup_gkernel(rrblup):
-  exec: rrblup.gkernel.wrapper.R
-  .alias: rrblup_gkernel
+gemma_bslmm(bayeslasso): gemma.bslmm.wrapper.R
+  result: file()
+  @ALIAS: args = List(w = nIter, s = burnin, result = result)
 
-score:
-  exec: score.R
-  params:
-    meta: $meta
-    prediction: $prediction
-  return: mse = output$mse, pcor = output$pcor, slope = output$slope
+score: score.R
+  meta: $meta
+  prediction: $prediction
+  $mse: output$mse
+  $pcor: output$pcor
+  $slope: output$slope
 
 DSC:
-  run: scenarios * (bayeslasso, gemma_bslmm, rrblup, rrblup_gkernel) * score 
+  define:
+    method: bayeslasso, gemma_bslmm, rrblup, rrblup_gkernel
+  run: simulate * method * score
   output: dsc_blm
   exec_path: datamakers, methods, .
   R_libs: BLR, rrBLUP

@@ -34,7 +34,7 @@ gemma.bslmm.wrapper = function(input, args){
   
   # fit bslmm model using training set
   # turn off all the snp filters
-  model_fitting_command = paste("methods/gemma -o", args$result,  "-notsnp")
+  model_fitting_command = paste("gemma -o", args$result,  "-notsnp")
   # specify the model type
   model_fitting_command = paste(model_fitting_command, "-bslmm", as.character(bslmm))
   # specify the training data
@@ -45,7 +45,7 @@ gemma.bslmm.wrapper = function(input, args){
   system(model_fitting_command)
   
   # predict traits for the test set  
-  train_predict_command = paste0("methods/gemma -o ", args$result, " -notsnp -epm ./output/",
+  train_predict_command = paste0("gemma -o ", args$result, " -notsnp -epm ./output/",
                                  args$result, ".param.txt -emu ./output/", args$result, ".log.txt -predict 1")
   train_predict_command = paste(train_predict_command, "-g", genotype.path, "-p", train.phenotype.path)
   system(train_predict_command)

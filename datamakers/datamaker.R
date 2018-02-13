@@ -1,5 +1,5 @@
+set.seed(seed)
 datamaker = function(args){
-  
   test.size = args$test.size # test sample size
   data.name = args$data.name # name of data set
   phenotype.id = args$phenotype.id # id of phenotype
