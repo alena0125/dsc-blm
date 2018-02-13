@@ -20,6 +20,7 @@ DSC: 100%|███████████████████████�
 INFO: Building DSC database ...
 INFO: DSC complete!
 INFO: Elapsed time 2558.711 seconds.
+=======
 ```
 
 ## Credits
