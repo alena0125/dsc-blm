@@ -51,13 +51,14 @@ bayeslasso.wrapper = function(input, args){
   YNA[whichNA] = NA
 
   # run gibbs sampler to fit bayes lasso model
+
+  # result_lambda.dat result_varE.dat
   if (is.null(A)){
-    fm=BLR::BLR(y=YNA, XL=X, GF=NULL, prior=priorBL, nIter=nIter, burnIn=burnIn, thin=thin, saveAt='result_')
+    fm=BLR::BLR(y=YNA, XL=X, GF=NULL, prior=priorBL, nIter=nIter, burnIn=burnIn, thin=thin, saveAt=args$result)
   } else {
-    fm=BLR::BLR(y=YNA, XL=X, GF=list(ID=(1:nrow(A)),A=A), prior=priorBL, nIter=nIter, burnIn=burnIn, thin=thin, saveAt='result_')
+    fm=BLR::BLR(y=YNA, XL=X, GF=list(ID=(1:nrow(A)),A=A), prior=priorBL, nIter=nIter, burnIn=burnIn, thin=thin, saveAt=args$result)
   }
   
-  system('rm result_lambda.dat result_varE.dat')
 
   # output the posterior mean as predicted value
   y.test.predict = fm$yHat[whichNA]

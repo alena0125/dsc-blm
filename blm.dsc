@@ -16,6 +16,7 @@ rrblup_gkernel(rrblup): rrblup.gkernel.wrapper.R
 bayeslasso(rrblup): bayeslasso.wrapper.R
   nIter: 1.1E4
   burnin: 1E3
+  result: file()
   @ALIAS: args = List()
 
 gemma_bslmm(bayeslasso): gemma.bslmm.wrapper.R

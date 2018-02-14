@@ -40,9 +40,8 @@ gblup.wrapper = function(input, args){
   
   # fit g-blup model
   ETA = list(list(K=G, model='RKHS'))
-  fm=BGLR::BGLR(y=YNA, ETA=ETA, nIter=nIter, burnIn=burnIn, thin=thin, saveAt='result_')
-  
-  system('rm result_ETA_1_varU.dat result_varE.dat result_mu.dat')
+  # result_ETA_1_varU.dat result_varE.dat result_mu.dat
+  fm=BGLR::BGLR(y=YNA, ETA=ETA, nIter=nIter, burnIn=burnIn, thin=thin, saveAt=args$result)
   
   # output the posterior mean as predicted value
   y.test.predict = fm$yHat[whichNA]
