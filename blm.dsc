@@ -19,7 +19,7 @@ bayeslasso(rrblup): bayeslasso.wrapper.R
   @ALIAS: args = List()
 
 gemma_bslmm(bayeslasso): gemma.bslmm.wrapper.R
-  result: file()
+  result: file(debug)
   @ALIAS: args = List(w = nIter, s = burnin, result = result)
 
 score: score.R
