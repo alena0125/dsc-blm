@@ -55,4 +55,4 @@ gemma.bslmm.wrapper = function(input, args){
 
   return(list(predict=y.test.predict))
 }
-prediction = gemma.bslmm.wrapper(input, args)$predict
+prediction = gemma.bslmm.wrapper(data, args)$predict

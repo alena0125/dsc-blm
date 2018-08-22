@@ -4,11 +4,11 @@ simulate: datamaker.R
   test_size: 100
   phenotype_id: 1
   @ALIAS: args = List(data.name = data_set, test.size = test_size, phenotype.id = phenotype_id)
-  $input: data$input
+  $data: data$input
   $meta: data$meta
 
 rrblup: rrblup.wrapper.R
-  input: $input
+  data: $data
   $prediction: prediction
 
 rrblup_gkernel(rrblup): rrblup.gkernel.wrapper.R

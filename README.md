@@ -9,16 +9,25 @@ pip install dsc
 If you run into issues with the installation please find more information on the DSC [installation guide](https://stephenslab.github.io/dsc-wiki/installation.html). 
 
 ## Running the benchmark
+
+To run only one replicate with 8 CPU threads,
+
 ```
 $ dsc blm.dsc -c 8
+
 INFO: DSC script exported to dsc_blm.html
 INFO: Constructing DSC from blm.dsc ...
-INFO: Building execution graph ...
-INFO: DSC in progress ...
-DSC: 100%|██████████████████████████████| 10/10 [42:36<00:00, 213.46s/it]
+INFO: Building execution graph & running DSC ...
+DSC: 100%|██████████████████████████████| 10/10 [00:46<00:00,  5.83s/it]
 INFO: Building DSC database ...
 INFO: DSC complete!
-INFO: Elapsed time 2558.711 seconds.
+INFO: Elapsed time 57.421 seconds.
+```
+
+To run with many replicates, 
+
+```
+dsc blm.dsc -c 8 --replicate 100
 ```
 
 ## Credits
